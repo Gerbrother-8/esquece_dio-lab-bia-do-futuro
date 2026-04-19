@@ -46,8 +46,8 @@ Abaixo estão os testes realizados para validar o comportamento do GIGA antes do
 
 **O que funcionou bem:**
 - **Personalização:** O uso do nome do cliente e menção às metas específicas.
-- **Extração de Dados:** A integração com Python/Pandas permitiu que a IA não errasse cálculos básicos de soma de categorias de gastos.
-- **Trava de Segurança:** O agente se mostrou resiliente às tentativas de forçar recomendações de alto risco.
+- **Extração de dados:** A integração com Python/Pandas permitiu que a IA não errasse cálculos básicos de soma de categorias de gastos.
+- **Trava de segurança:** O agente se mostrou resiliente às tentativas de forçar recomendações de alto risco.
 
 **O que pode melhorar:**
-- **Detecção de Sinônimos:** Em alguns casos, o agente demorou a associar "compras de mês" com a categoria "Supermercado". Um ajuste futuro no mapeamento de categorias via código pode resolver.
+- **Detecção de sinônimos:** Em alguns casos, o agente demorou a associar "compras de mês" com a categoria "Supermercado". Um ajuste futuro no mapeamento de categorias via código pode resolver.
