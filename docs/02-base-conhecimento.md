@@ -2,39 +2,24 @@
 
 ## Dados Utilizados
 
-Descreva se usou os arquivos da pasta `data`, por exemplo:
+O FinMatcher utiliza os dados mockados fornecidos para garantir que as sugestões sejam fundamentadas em informações reais do cliente e no catálogo oficial do banco.
 
 | Arquivo | Formato | Utilização no Agente |
 |---------|---------|---------------------|
-| `historico_atendimento.csv` | CSV | Contextualizar interações anteriores |
-| `perfil_investidor.json` | JSON | Personalizar recomendações |
-| `produtos_financeiros.json` | JSON | Sugerir produtos adequados ao perfil |
-| `transacoes.csv` | CSV | Analisar padrão de gastos do cliente |
-
-> [!TIP]
-> **Quer um dataset mais robusto?** Você pode utilizar datasets públicos do [Hugging Face](https://huggingface.co/datasets) relacionados a finanças, desde que sejam adequados ao contexto do desafio.
-
----
-
-## Adaptações nos Dados
-
-> Você modificou ou expandiu os dados mockados? Descreva aqui.
-
-[Sua descrição aqui]
+| `perfil_investidor.json` | JSON | **Fonte Primária**: Define o perfil de investidor (nível de risco e objetivos) do usuário. |
+| `produtos_financeiros.json` | JSON | **Fonte Primária**: Catálogo oficial de produtos financeiros para cruzamento de dados. |
+| `historico_atendimento.csv` | CSV | **Fonte Secundária**: Fornece contexto sobre interações passadas. |
+| `transacoes.csv` | CSV | **Fonte Secundária**: Permite validar a disponibilidade de saldo para aportes. |
 
 ---
 
 ## Estratégia de Integração
 
 ### Como os dados são carregados?
-> Descreva como seu agente acessa a base de conhecimento.
-
-[ex: Os JSON/CSV são carregados no início da sessão e incluídos no contexto do prompt]
+Os arquivos são carregados em memória no início da execução da aplicação Streamlit utilizando as bibliotecas `json` e `pandas`. Os dados são convertidos para strings formatadas para que a LLM possa processá-los facilmente.
 
 ### Como os dados são usados no prompt?
-> Os dados vão no system prompt? São consultados dinamicamente?
-
-[Sua descrição aqui]
+Os dados são injetados diretamente no **Contexto do Agente**. Sempre que o usuário faz uma pergunta, o FinMatcher recupera as informações do perfil e o catálogo de produtos e os envia como parte da instrução do sistema (System Message), garantindo que a resposta seja baseada estritamente nesses dados (técnica de Grounding).
 
 ---
 
@@ -43,13 +28,16 @@ Descreva se usou os arquivos da pasta `data`, por exemplo:
 > Mostre um exemplo de como os dados são formatados para o agente.
 
 ```
-Dados do Cliente:
+[CONTEXTO DE PERFIL]
 - Nome: João Silva
 - Perfil: Moderado
-- Saldo disponível: R$ 5.000
+- Objetivos: Aposentadoria, Reserva de Emergência
 
-Últimas transações:
-- 01/11: Supermercado - R$ 450
-- 03/11: Streaming - R$ 55
-...
+[CATÁLOGO DE PRODUTOS DISPONÍVEIS]
+- Produto A: CDB Pós-Fixado (Risco: Baixo)
+- Produto B: Fundo de Ações (Risco: Alto)
+- Produto C: Tesouro Direto (Risco: Baixo)
+
+[PERGUNTA DO USUÁRIO]
+"Quais produtos você me sugere para minha reserva de emergência?"
 ```
