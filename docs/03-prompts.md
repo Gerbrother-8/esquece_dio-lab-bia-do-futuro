@@ -102,8 +102,6 @@ Qual dessas opções você gostaria de explorar melhor?"
 
 - Ajuste de terminologia: Inicialmente, o agente usava o termo "recomendação". Recomendações formais de investimentos no Brasil só podem ser feitas por profissionais certificados e registrados na CVM (Comissão de Valores Mobiliários). Por isso, ajustei o prompt para forçar o uso exclusivo de "sugestão", deixando claro o caráter informativo do bot.
 
-- Prevenção de risco rnadequado: Durante os testes, o modelo sugeriu um Fundo de Ações para um perfil que não aceitava risco, baseando-se apenas na meta de longo prazo. Adicionei a regra rígida de checagem do campo aceita_risco no System Prompt para travar sugestões de renda variável.
-
 - Controle de alucinações de mercado: O agente tentava inventar cotações de ações do dia quando questionado sobre o mercado. Foi necessário incluir uma restrição explícita sobre dados em tempo real e outra orientando o agente a admitir a falta de informação em vez de simular dados.
 
 - Foco na persona: O tom inicial estava muito robótico. Inseri diretrizes de "personalidade encorajadora" para que o bot não fosse apenas um calculador de gastos, mas um motivador para que o usuário alcance suas metas financeiras.
