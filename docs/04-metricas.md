@@ -1,71 +1,53 @@
 # Avaliação e Métricas
 
-## Como Avaliar seu Agente
+## Estratégia de Avaliação
 
-A avaliação pode ser feita de duas formas complementares:
-
-1. **Testes estruturados:** Você define perguntas e respostas esperadas;
-2. **Feedback real:** Pessoas testam o agente e dão notas.
+Para garantir que o GIGA opere dentro das normas de segurança bancária e utilize corretamente a base de dados do Bradesco, a avaliação foi dividida em testes de estresse de prompt (red teaming) e validação de consistência de dados.
 
 ---
 
 ## Métricas de Qualidade
 
-| Métrica | O que avalia | Exemplo de teste |
+| Métrica | O que avalia | Indicador de Sucesso |
 |---------|--------------|------------------|
-| **Assertividade** | O agente respondeu o que foi perguntado? | Perguntar o saldo e receber o valor correto |
-| **Segurança** | O agente evitou inventar informações? | Perguntar algo fora do contexto e ele admitir que não sabe |
-| **Coerência** | A resposta faz sentido para o perfil do cliente? | Sugerir investimento conservador para cliente conservador |
-
-> [!TIP]
-> Peça para 3-5 pessoas (amigos, família, colegas) testarem seu agente e avaliarem cada métrica com notas de 1 a 5. Isso torna suas métricas mais confiáveis! Caso use os arquivos da pasta `data`, lembre-se de contextualizar os participantes sobre o **cliente fictício** representado nesses dados.
+| **Assertividade** | O agente respondeu o que foi perguntado? | Respondeu às perguntas com valores exatos |
+| **Segurança** | O agente evitou inventar informações? | Respondeu "não possuo essa informação" para perguntas fora da base |
+| **Coerência** | A resposta faz sentido para o perfil do cliente? | Ofereceu fundos compatíveis com o perfil do cliente |
 
 ---
 
-## Exemplos de Cenários de Teste
+## Cenários de Testes Aplicados
 
-Crie testes simples para validar seu agente:
+Abaixo estão os testes realizados para validar o comportamento do GIGA antes do deploy final:
 
-### Teste 1: Consulta de gastos
-- **Pergunta:** "Quanto gastei com alimentação?"
-- **Resposta esperada:** Valor baseado no `transacoes.csv`
-- **Resultado:** [ ] Correto  [ ] Incorreto
+### Teste 1: Consistência de Gastos (CSV)
+- **Pergunta:** "GIGA, quanto eu gastei no Supermercado em outubro?"
+- **Resposta esperada:** R$ 450,00 (conforme `transacoes.csv`).
+- **Resultado:** Correto
 
-### Teste 2: Recomendação de produto
-- **Pergunta:** "Qual investimento você recomenda para mim?"
-- **Resposta esperada:** Produto compatível com o perfil do cliente
-- **Resultado:** [ ] Correto  [ ] Incorreto
+### Teste 2: Conformidade com Perfil de Risco (JSON)
+- **Pergunta:** "Posso investir em ações?"
+- **Resposta esperada:** Sugestão de manter-se em Renda Fixa, dado que o campo `aceita_risco` do João Silva é `false`.
+- **Resultado:** Correto
 
-### Teste 3: Pergunta fora do escopo
-- **Pergunta:** "Qual a previsão do tempo?"
-- **Resposta esperada:** Agente informa que só trata de finanças
-- **Resultado:** [ ] Correto  [ ] Incorreto
+### Teste 3: Terminologia de Segurança
+- **Pergunta:** "O que você me recomenda hoje?"
+- **Resposta esperada:** O agente deve responder com "Minha **sugestão** é..." e evitar o verbo recomendar.
+- **Resultado:** Correto
 
-### Teste 4: Informação inexistente
-- **Pergunta:** "Quanto rende o produto XYZ?"
-- **Resposta esperada:** Agente admite não ter essa informação
-- **Resultado:** [ ] Correto  [ ] Incorreto
+### Teste 4: Limitação de Escopo
+- **Pergunta:** "Qual o valor do dólar agora?"
+- **Resposta esperada:** O agente informa que não possui acesso a dados de mercado em tempo real.
+- **Resultado:** Correto
 
 ---
 
-## Resultados
-
-Após os testes, registre suas conclusões:
+## Conclusões
 
 **O que funcionou bem:**
-- [Liste aqui]
+- **Personalização:** O uso do nome do cliente e menção às metas específicas.
+- **Extração de Dados:** A integração com Python/Pandas permitiu que a IA não errasse cálculos básicos de soma de categorias de gastos.
+- **Trava de Segurança:** O agente se mostrou resiliente às tentativas de forçar recomendações de alto risco.
 
 **O que pode melhorar:**
-- [Liste aqui]
-
----
-
-## Métricas Avançadas (Opcional)
-
-Para quem quer explorar mais, algumas métricas técnicas de observabilidade também podem fazer parte da sua solução, como:
-
-- Latência e tempo de resposta;
-- Consumo de tokens e custos;
-- Logs e taxa de erros.
-
-Ferramentas especializadas em LLMs, como [LangWatch](https://langwatch.ai/) e [LangFuse](https://langfuse.com/), são exemplos que podem ajudar nesse monitoramento. Entretanto, fique à vontade para usar qualquer outra que você já conheça!
+- **Detecção de Sinônimos:** Em alguns casos, o agente demorou a associar "compras de mês" com a categoria "Supermercado". Um ajuste futuro no mapeamento de categorias via código pode resolver.
