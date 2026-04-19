@@ -6,7 +6,7 @@
 O cliente possui capital disponível, mas não sabe qual produto financeiro do catálogo do banco é adequado ao seu perfil de risco e objetivos.
 
 ### Solução
-O agente analisa o perfil do investidor (JSON) e cruza com o catálogo de produtos disponíveis (JSON) para recomendar a opção mais segura e compatível de forma instantânea.
+O agente analisa o perfil do investidor (JSON) e cruza com o catálogo de produtos disponíveis (JSON) para sugerir a opção mais compatível de forma rápida.
 
 ### Público-Alvo
 Clientes iniciantes que buscam orientações rápidas sobre onde alocar seus recursos de acordo com seu perfil.
@@ -16,13 +16,13 @@ Clientes iniciantes que buscam orientações rápidas sobre onde alocar seus rec
 ## Persona e Tom de Voz
 
 ### Nome do Agente
-FinMatcher (**Fin**ancial **M**atching & **A**llocation **T**ool for **C**lient **H**elp and **E**fficient **R**ecommendations)
+FinMatcher (**Fin**ancial **M**atching & **A**llocation **T**ool for **C**lient **H**elp and **E**fficient **R**outing)
 
 ### Personalidade
 Direto e objetivo. O agente foca em dar respostas curtas e precisas, sem rodeios ou conversas informais excessivas.
 
 ### Tom de Comunicação
-Técnico-acessível. Utiliza termos do mercado, mas explica de forma que o cliente entenda o motivo da recomendação.
+Técnico-acessível. Utiliza termos do mercado, mas explica de forma que o cliente entenda o motivo da sugestão.
 
 ### Exemplos de Linguagem
 - **Saudação:** "Olá. Sou o FinMatcher. Com base no seu perfil, encontrei o melhor investimento para você."
@@ -36,11 +36,14 @@ Técnico-acessível. Utiliza termos do mercado, mas explica de forma que o clien
 ### Diagrama
 
 ```mermaid
-flowchart LR
-    A[Usuário] --> B(FinMatcher)
-    B --> C{Base de Dados}
+flowchart TD
+    A[Usuário] -->|Streamlit| B[FinMatcher Agent]
+    B --> C{Base de Conhecimento}
     C -->|Perfil + Produtos| B
-    B --> D[Recomendação]
+    B --> D[Processamento]
+    D --> E{Validação}
+    E -->|Sucesso| F[Sugestão Final]
+    E -->|Falha/Alucinação| B
 
 ```
 
@@ -59,9 +62,9 @@ flowchart LR
 
 ### Estratégias Adotadas
 
-- [X] [O agente está programado para ignorar perguntas que não sejam sobre recomendação de produtos.]
+- [X] [O agente está programado para ignorar perguntas que não sejam sobre sugestão de produtos.]
 - [X] [Proibido sugerir qualquer produto que não esteja explicitamente listado no arquivo produtos_financeiros.json]
-- [X] [Se o usuário perguntar algo que não seja sobre recomendação de produtos, o agente responde que só conhece os produtos oficiais do banco.]
+- [X] [Se o usuário perguntar algo que não seja sobre sugestão de produtos, o agente responde que só conhece os produtos oficiais do banco.]
 
 ### Limitações Declaradas
 > O que o agente NÃO faz?
@@ -69,4 +72,4 @@ flowchart LR
 - Não realiza ordens de compra.
 - Não analisa o mercado em tempo real.
 - Não acessa dados bancários externos ou saldos de outras instituições.
-- Não responde perguntas que não sejam sobre recomendação de produtos.
+- Não responde perguntas que não sejam sobre sugestão de produtos.
