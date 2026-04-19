@@ -67,7 +67,6 @@ flowchart TD
 - [X] [Se o usuário perguntar algo que não seja sobre sugestão de produtos, o agente responde que só conhece os produtos oficiais do banco.]
 
 ### Limitações Declaradas
-> O que o agente NÃO faz?
 
 - Não realiza ordens de compra.
 - Não analisa o mercado em tempo real.
