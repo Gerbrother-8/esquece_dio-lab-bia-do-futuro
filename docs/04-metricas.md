@@ -2,7 +2,7 @@
 
 ## Estratégia de Avaliação
 
-Para garantir que o GIGA opere dentro das normas de segurança bancária e utilize corretamente a base de dados do Bradesco, a avaliação foi dividida em testes de estresse de prompt (red teaming) e validação de consistência de dados.
+Para garantir que o GIGA opere dentro das normas de segurança bancária e utilize corretamente a base de dados, a avaliação foi dividida em testes de estresse de prompt (red teaming) e validação de consistência de dados.
 
 ---
 
