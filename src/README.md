@@ -14,6 +14,7 @@ Chatbot GIGA/
 ├── src/                            # Scripts de execução
     ├── app.py                      # Aplicação principal (Streamlit)
     └── requirements.txt            # Bibliotecas necessárias
+    └── README.md                   # Estrutura do código e como rodar
 ```
 
 ## Como Rodar
