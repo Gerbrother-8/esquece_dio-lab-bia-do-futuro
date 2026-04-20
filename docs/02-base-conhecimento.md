@@ -6,7 +6,7 @@
 |---------|---------|---------------------|
 | `historico_atendimento.csv` | CSV | Fornece contexto sobre dúvidas anteriores e padrões de suporte. |
 | `perfil_investidor.json` | JSON | Define o perfil de risco, metas e limites do cliente. |
-| `produtos_financeiros.json` | JSON | Serve como o catálogo oficial de produtos para recomendações de investimento. |
+| `produtos_financeiros.json` | JSON | Serve como o catálogo oficial de produtos para sugestões de investimento. |
 | `transacoes.csv` | CSV | Permite a análise de fluxo de caixa e identificação de hábitos de consumo. |
 
 ---
