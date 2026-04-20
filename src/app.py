@@ -3,7 +3,6 @@ import pandas as pd
 import json
 import os
 from google import genai
-from datetime import datetime
 
 # ==========================================
 # 1. CONFIGURAÇÃO DA PÁGINA
@@ -24,7 +23,7 @@ st.caption("Gestor Inteligente de Gastos e Ativos")
 
 @st.cache_data
 def carregar_dados_locais():
-    caminho_base = r"C:\Users\germa\OneDrive\Documentos\Chatbot GIGA\data"
+    caminho_base = os.path.join(os.path.dirname(__file__), "..", "data")
     try:
         perfil = json.load(open(os.path.join(caminho_base, 'perfil_investidor.json'), encoding='utf-8'))
         produtos = json.load(open(os.path.join(caminho_base, 'produtos_financeiros.json'), encoding='utf-8'))
