@@ -9,7 +9,7 @@ from google import genai
 # ==========================================
 
 st.set_page_config(
-    page_title="GIGA - Gestor Inteligente de Gastos e Ativos",
+    page_title="GIGA - Gestor Inteligente",
     page_icon="💰",
     layout="centered"
 )
