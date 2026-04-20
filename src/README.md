@@ -1,23 +1,19 @@
 # Código da Aplicação
 
-Esta pasta contém o código do seu agente financeiro.
+Esta pasta contém o código do **GIGA (Gestor Inteligente de Gastos e Ativos)**.
 
-## Estrutura Sugerida
-
-```
-src/
-├── app.py              # Aplicação principal (Streamlit/Gradio)
-├── agente.py           # Lógica do agente
-├── config.py           # Configurações (API keys, etc.)
-└── requirements.txt    # Dependências
-```
-
-## Exemplo de requirements.txt
+## Estrutura
 
 ```
-streamlit
-openai
-python-dotenv
+Chatbot GIGA/
+├── data/                           # Base de dados local (contexto do agente)
+│   ├── perfil_investidor.json      # Perfil do cliente.
+│   ├── produtos_financeiros.json   # Catálogo de produtos.
+│   ├── transacoes.csv              # Transações financeiras.
+│   └── historico_atendimento.csv   # Dúvidas anteriores.
+├── src/                            # Scripts de execução
+    ├── app.py                      # Aplicação principal (Streamlit)
+    └── requirements.txt            # Bibliotecas necessárias
 ```
 
 ## Como Rodar
